@@ -5,7 +5,9 @@ from collections import defaultdict
 import ufal.morphodita as morphodita
 
 
-RULE_REGEX = re.compile(r"\s*((?P<flags>(\$\S+,)*\$\S+)\s+)?((?P<left>\S+)\))?\s*(?P<source>\S+)\s*(\((?P<right>\S+))?\s*->\s*(?P<targets>\S+)\s*")
+RULE_REGEX = re.compile(
+    r"\s*((?P<flags>(\$\S+,)*\$\S+)\s+)?((?P<left>\S+)\))?\s*(?P<source>\S+)\s*(\((?P<right>\S+))?\s*->\s*(?P<targets>\S+)\s*"
+)
 
 UNVOICED_GROUP = "F"
 VOICED_GROUP = "G"
@@ -14,19 +16,20 @@ VOWEL_GROUP = "A"
 NOT_VOWEL_GROUP = "K"
 SPACE = "_"
 
-UNVOICED  = ["p", "t", "ť", "k", "ch", "c", "č", "s", "š", "f"]
-VOICED    = ["b", "d", "ď", "g", "h", "dz", "dž", "z", "ž", "v"]
-VOWELS    = ["a", "e", "i", "o", "u", "y", "á", "é", "í", "ó", "ú", "ý", "ô"]
+UNVOICED = ["p", "t", "ť", "k", "ch", "c", "č", "s", "š", "f"]
+VOICED = ["b", "d", "ď", "g", "h", "dz", "dž", "z", "ž", "v"]
+VOWELS = ["a", "e", "i", "o", "u", "y", "á", "é", "í", "ó", "ú", "ý", "ô"]
 SONORANTS = ["r", "ŕ", "n", "m", "l", "ĺ", "ľ", "j"]
 
-UNVOICED_PHONE = ["p", "t", "c",   "k", "x", "G",   "ts", "tS", "s", "S", "f"]
-VOICED_PHONE   = ["b", "d", "J\\", "g", "h", "h\\", "dz", "dZ", "z", "Z", "v"]
-VOWEL_PHONE    = ["a:", "E:", "i:", "o:", "u:", "y:", "a", "{", "E", "i", "O", "U"]
-DIPHTHONGS     = ["i_^a", "i_^E", "i_^u", "U_^O"]
+UNVOICED_PHONE = ["p", "t", "c", "k", "x", "G", "ts", "tS", "s", "S", "f"]
+VOICED_PHONE = ["b", "d", "J\\", "g", "h", "h\\", "dz", "dZ", "z", "Z", "v"]
+VOWEL_PHONE = ["a:", "E:", "i:", "o:", "u:", "y:", "a", "{", "E", "i", "O", "U"]
+DIPHTHONGS = ["i_^a", "i_^E", "i_^u", "U_^O"]
 SONORANT_PHONE = ["l:", "l=:", "r:", "r=:", "r", "l", "_l", "L", "n", "J", "m", "j", "w"]
 
 MORPHODITA_MORPHO_MODEL = "models/slovak-morfflex-pdt-170914/slovak-morfflex-170914.dict"
 MORPHODITA_TAGGER_MODEL = "models/slovak-morfflex-pdt-170914/slovak-morfflex-pdt-170914.tagger"
+
 
 def add_voicing(phone: str) -> str:
     try:
@@ -34,11 +37,13 @@ def add_voicing(phone: str) -> str:
     except ValueError:
         return phone
 
+
 def remove_voicing(phone: str) -> str:
     try:
         return UNVOICED_PHONE[VOICED_PHONE.index(phone)]
     except ValueError:
         return phone
+
 
 def change_voicing(phone: str) -> str:
     if phone in UNVOICED_PHONE:
@@ -68,12 +73,14 @@ class Rule:
         return (len(self.source), len(self.flags), ctx)
 
     def _substitute_groups(self, s: str) -> str:
-        return s.replace(SPACE, " ") \
-                .replace(UNVOICED_GROUP, "(?:" + "|".join(UNVOICED) + ")") \
-                .replace(VOICED_OBSTRUENT_GROUP, "(?:" + "|".join(VOICED) + ")") \
-                .replace(VOICED_GROUP, "(?:" + "|".join(VOICED + VOWELS + SONORANTS) + ")") \
-                .replace(VOWEL_GROUP, "[" + "".join(VOWELS) + "]") \
-                .replace(NOT_VOWEL_GROUP, "[^" + "".join(VOWELS) + "]")
+        return (
+            s.replace(SPACE, " ")
+            .replace(UNVOICED_GROUP, "(?:" + "|".join(UNVOICED) + ")")
+            .replace(VOICED_OBSTRUENT_GROUP, "(?:" + "|".join(VOICED) + ")")
+            .replace(VOICED_GROUP, "(?:" + "|".join(VOICED + VOWELS + SONORANTS) + ")")
+            .replace(VOWEL_GROUP, "[" + "".join(VOWELS) + "]")
+            .replace(NOT_VOWEL_GROUP, "[^" + "".join(VOWELS) + "]")
+        )
 
     def _construct_regex(self):
         left = self._substitute_groups(self.left[::-1]) if self.left else ""
@@ -81,7 +88,7 @@ class Rule:
         self._left_regex = re.compile(f"^{left}", re.IGNORECASE) if self.left else None
         self._right_regex = re.compile(f"^{self.source}{right}", re.IGNORECASE)
 
-    def match(self, text: str, idx: int, flags: list[str]=[]) -> bool:
+    def match(self, text: str, idx: int, flags: list[str] = []) -> bool:
         left_ctx = text[:idx][::-1]
         right_ctx = text[idx:]
         if self.flags and not all(flag in flags for flag in self.flags):
@@ -103,7 +110,7 @@ def transcribe(rules: list[Rule], flags: list[tuple[int, int, set[str]]], text: 
     i = 0
     flag_idx = 0
     while i < n:
-        if flag_idx < len(flags) and  flags[flag_idx][1] <= i:
+        if flag_idx < len(flags) and flags[flag_idx][1] <= i:
             flag_idx += 1
 
         flag_sets = [set()]
@@ -121,7 +128,10 @@ def transcribe(rules: list[Rule], flags: list[tuple[int, int, set[str]]], text: 
                 i += len(rule.source)
                 break
         else:
-            print(f"Could not transcribe '{text}'. No rule for '{text[i]}'.", file=sys.stderr)
+            print(
+                f"Could not transcribe '{text}'. No rule for '{text[i]}'.",
+                file=sys.stderr,
+            )
             return []
 
     transcription = apply_regressive_assimilation(transcription)
@@ -138,12 +148,13 @@ def tag_word(text: str, morpho: morphodita.Morpho) -> list[list[str]]:
     tags = []
     while tokenizer.nextSentence(forms, tokens):
         for token in tokens:
-            morpho.analyze(text[token.start:token.start + token.length], morpho.GUESSER, lemmas)
+            morpho.analyze(text[token.start : token.start + token.length], morpho.GUESSER, lemmas)
             possible_tags = []
             for lemma in lemmas:
                 tags.append((token.start, token.start + token.length, lemma.tag))
 
     return tags
+
 
 def tag_sentence(text: str, tagger: morphodita.Tagger) -> list[tuple[int, int, str]]:
     forms = morphodita.Forms()
@@ -156,8 +167,8 @@ def tag_sentence(text: str, tagger: morphodita.Tagger) -> list[tuple[int, int, s
     while tokenizer.nextSentence(forms, tokens):
         tagger.tag(forms, lemmas)
         for i, (form, lemma) in enumerate(zip(forms, lemmas)):
-           token = tokens[i]
-           tags.append((token.start, token.start + token.length, lemma.tag))
+            token = tokens[i]
+            tags.append((token.start, token.start + token.length, lemma.tag))
 
     return tags
 
@@ -221,7 +232,13 @@ if __name__ == "__main__":
             if m := re.match(RULE_REGEX, line):
                 groups = m.groupdict()
                 rules.append(
-                    Rule(groups["left"], groups["source"], groups["right"], groups["targets"].split(","), groups["flags"].split(",") if groups["flags"] else [])
+                    Rule(
+                        groups["left"],
+                        groups["source"],
+                        groups["right"],
+                        groups["targets"].split(","),
+                        groups["flags"].split(",") if groups["flags"] else [],
+                    )
                 )
             else:
                 print(f"Could not parse rule '{line}'", file=sys.stderr)
@@ -251,4 +268,3 @@ if __name__ == "__main__":
 
             for transcription in transcriptions:
                 print(word, transcription, sep="\t")
-
