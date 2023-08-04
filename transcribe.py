@@ -103,7 +103,7 @@ class Rule:
         return f"{self.flags} {self.left + ') ' if self.left else ''}{self.source}{' (' + self.right if self.right else ''} -> {self.targets}"
 
 
-def transcribe(rules: list[Rule], flags: list[tuple[int, int, set[str]]], text: str):
+def transcribe(rules: list[Rule], flags: list[tuple[int, int, str]], text: str):
     text = " " + text + " "
     transcription = []
     n = len(text)
@@ -113,16 +113,12 @@ def transcribe(rules: list[Rule], flags: list[tuple[int, int, set[str]]], text: 
         if flag_idx < len(flags) and flags[flag_idx][1] <= i:
             flag_idx += 1
 
-        flag_sets = [set()]
-        if flag_idx < len(flags):
-            flag_sets = flags[flag_idx][2]
-
         if text[i] in {" ", "-", ","}:
             i += 1
             continue
 
         for rule in rules:
-            if rule.match(text, i, flag_sets[0]):
+            if rule.match(text, i, flags):
                 if rule.targets[0] != "_":
                     transcription.extend(rule.targets)
                 i += len(rule.source)
@@ -201,16 +197,18 @@ def devoice_final(phones: list[str]) -> list[str]:
 
 def apply_regressive_assimilation(phones: list[str]) -> list[str]:
     new_phones = phones.copy()
-    i = len(phones) - 1
+    i = len(new_phones) - 1
     voicing_f = None
     while i > 0:
         if voicing_f:
-            new_phones[i] = voicing_f(phones[i])
+            new_phones[i] = voicing_f(new_phones[i])
+
+        if new_phones[i] in VOICED:
+            voicing_f = add_voicing
+        elif new_phones[i] in UNVOICED:
+            voicing_f = remove_voicing
         else:
-            if phones[i] in VOICED:
-                voicing_f = add_voicing
-            elif phones[i] in UNVOICED:
-                voicing_f = remove_voicing
+            voicing_f = None
 
         i -= 1
 
@@ -262,6 +260,8 @@ if __name__ == "__main__":
             for start, end, tag in tags:
                 flags = [(start, end, create_flags(tag))]
                 transcription = transcribe(rules, flags, word)
+                if not transcription:
+                    continue
                 transcriptions.add(transcription)
                 devoiced = devoice_final(transcription.split(" "))
                 transcriptions.add(" ".join(devoiced))
