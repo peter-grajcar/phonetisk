@@ -16,16 +16,16 @@ VOWEL_GROUP = "A"
 NOT_VOWEL_GROUP = "K"
 SPACE = "_"
 
-UNVOICED = ["p", "t", "ť", "k", "ch", "c", "č", "s", "š", "f"]
-VOICED = ["b", "d", "ď", "g", "h", "dz", "dž", "z", "ž", "v"]
+UNVOICED = ["p", "t", "ť", "k", "ch", "c", "č", "s", "š", "f", "f"]
+VOICED = ["b", "d", "ď", "g", "h", "dz", "dž", "z", "ž", "v", "w"]
 VOWELS = ["a", "e", "i", "o", "u", "y", "á", "é", "í", "ó", "ú", "ý", "ô"]
 SONORANTS = ["r", "ŕ", "n", "m", "l", "ĺ", "ľ", "j"]
 
 UNVOICED_PHONE = ["p", "t", "c", "k", "x", "G", "ts", "tS", "s", "S", "f"]
-VOICED_PHONE = ["b", "d", "J\\", "g", "h", "h\\", "dz", "dZ", "z", "Z", "v"]
-VOWEL_PHONE = ["a:", "E:", "i:", "o:", "u:", "y:", "a", "{", "E", "i", "O", "U"]
+VOICED_PHONE =   ["b", "d", "J\\", "g", "h", "h\\", "dz", "dZ", "z", "Z", "v"]
+VOWEL_PHONE = ["a:", "E:", "i:", "o:", "u:", "y:", "a", "{", "E", "i", "O", "U", "U_^"]
 DIPHTHONGS = ["i_^a", "i_^E", "i_^u", "U_^O"]
-SONORANT_PHONE = ["l:", "l=:", "r:", "r=:", "r", "l", "_l", "L", "n", "J", "m", "j", "w"]
+SONORANT_PHONE = ["l:", "l=:", "r:", "r=:", "r", "l", "_l", "L", "n", "J", "m", "j"]
 
 MORPHODITA_MORPHO_MODEL = "models/slovak-morfflex-pdt-170914/slovak-morfflex-170914.dict"
 MORPHODITA_TAGGER_MODEL = "models/slovak-morfflex-pdt-170914/slovak-morfflex-pdt-170914.tagger"

@@ -110,11 +110,13 @@ t (ér     -> t
 t (ea     -> t
 t (ium    -> t
 t (izm    -> t
+ak) t (ív -> t
+ak) t (iv -> t
 $adj t (í_ -> t
 
 
 ť     -> c
-ť (_G -> J\\
+ť (_G -> J\
 
 k     -> k
 k (_G -> g
@@ -166,6 +168,18 @@ d (ea     -> d
 d (ium    -> d
 d (ek     -> d
 aka) d (e -> d
+_na) d (i -> d
+_na) d (í -> d
+_na) d (e -> d
+_po) d (i -> d
+_po) d (í -> d
+_po) d (e -> d
+_pre) d (i -> d
+_pre) d (í -> d
+_pre) d (e -> d
+_popo) d (i -> d
+_popo) d (í -> d
+_popo) d (e -> d
 $adj d (í_ -> d
 
 ď    -> J\
