@@ -21,8 +21,10 @@ p) tč     -> tS
 
    čš    -> tS:
    dc    -> ts:
+   d (ch -> t
    dč    -> tS:
    tc    -> ts:
+   t (ch -> t
    tč    -> tS:
 A) ds (A -> ts:
 A) dš (A -> tS:
@@ -33,10 +35,12 @@ nn -> n:
 rr -> r:
 ll -> l:
 žš -> S:
+zs -> s:
 dt -> t:
 ťt -> c:
 ďť -> c:
 dť -> c:
+ťd (e -> J\:
 
 ch     -> x
 _) ch  -> x
@@ -114,9 +118,21 @@ t (ér     -> t
 t (ea     -> t
 t (ium    -> t
 t (izm    -> t
+t (enz    -> t
+t (ech    -> t
+ma) t (e  -> t
+_) t (ím  -> t
+in) t (en -> t
+jus) t (i -> t
+jus) t (é -> t
+po) t (enc -> t
+a) t (ív  -> t
 ak) t (ív -> t
 ak) t (iv -> t
+_ho) t (el -> t
 $adj t (í_ -> t
+$adj t (ej_ -> t
+$adj t (ého_ -> t
 
 
 ť     -> c
@@ -184,6 +200,11 @@ _) d (iv  -> d
 _) d (is  -> d
 _) d (ip  -> d
 _) d (iz  -> d
+me) d (ic -> d
+me) d (ik -> d
+me) d (iá -> d
+mé) d (i -> d
+in) d (i  -> d
 aka) d (e -> d
 _na) d (i -> d
 _na) d (í -> d
@@ -197,7 +218,10 @@ _pre) d (e -> d
 _popo) d (i -> d
 _popo) d (í -> d
 _popo) d (e -> d
+$adj d (i_ -> d
 $adj d (í_ -> d
+$adj d (ej_ -> d
+$adj d (ého -> d
 
 ď    -> J\
 ď (_ -> c
@@ -263,6 +287,12 @@ l (er     -> l
 l (ér     -> l
 l (ea     -> l
 l (ium    -> l
+k) l (im  -> l
+koa) l (i -> l
+ko) l (íz -> l
+konf) l (i -> l
+l (eg -> l
+l (ég -> l
 
 ĺ       -> l:
 K) ĺ (K -> l=:
@@ -281,6 +311,7 @@ n (e -> J
 n (i -> J
 n (í -> J
 n (ď -> J
+ra) n (i -> J
 n (ickA   -> n
 n (izova  -> n
 n (izmu   -> n
@@ -298,11 +329,15 @@ n (er     -> n
 n (ér     -> n
 n (ea     -> n
 n (ium    -> n
+u) n (ikát -> n
+u) n (iv -> n
 mi) n (i  -> n
-l) n (ej  -> n
+lí) n (iA -> n
 $adj n (í_ -> n
 $adj n (i_ -> n
 $adj n (ej_ -> n
+$adj n (eho_ -> n
+$adj n (ého_ -> n
 $adj,$pl n (e_ -> n
 
 ň -> J

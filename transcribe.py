@@ -21,11 +21,11 @@ VOICED = ["b", "d", "ď", "g", "h", "dz", "dž", "z", "ž", "v", "w"]
 VOWELS = ["a", "e", "i", "o", "u", "y", "á", "é", "í", "ó", "ú", "ý", "ô"]
 SONORANTS = ["r", "ŕ", "n", "m", "l", "ĺ", "ľ", "j"]
 
-UNVOICED_PHONE = ["p", "t", "c", "k", "x", "G", "ts", "tS", "s", "S", "f"]
-VOICED_PHONE =   ["b", "d", "J\\", "g", "h", "h\\", "dz", "dZ", "z", "Z", "v"]
-VOWEL_PHONE = ["a:", "E:", "i:", "o:", "u:", "y:", "a", "{", "E", "i", "O", "U", "U_^"]
+UNVOICED_PHONES = ["p", "t", "c", "k", "x", "G", "ts", "tS", "s", "S", "f", "c:", "s:" "S:" "ts:", "tS:"]
+VOICED_PHONES =   ["b", "d", "J\\", "g", "h", "h\\", "dz", "dZ", "z", "Z", "v", "J\\:", "z:" "Z\\:", "dz:", "dZ:"]
+VOWEL_PHONES = ["a:", "E:", "i:", "o:", "u:", "y:", "a", "{", "E", "i", "O", "U", "U_^"]
 DIPHTHONGS = ["i_^a", "i_^E", "i_^u", "U_^O"]
-SONORANT_PHONE = ["l:", "l=:", "r:", "r=:", "r", "l", "_l", "L", "n", "J", "m", "j"]
+SONORANT_PHONES = ["l:", "l=:", "r:", "r=:", "r", "l", "_l", "L", "n", "J", "m", "j"]
 
 MORPHODITA_MORPHO_MODEL = "models/slovak-morfflex-pdt-170914/slovak-morfflex-170914.dict"
 MORPHODITA_TAGGER_MODEL = "models/slovak-morfflex-pdt-170914/slovak-morfflex-pdt-170914.tagger"
@@ -33,22 +33,22 @@ MORPHODITA_TAGGER_MODEL = "models/slovak-morfflex-pdt-170914/slovak-morfflex-pdt
 
 def add_voicing(phone: str) -> str:
     try:
-        return VOICED_PHONE[UNVOICED_PHONE.index(phone)]
+        return VOICED_PHONES[UNVOICED_PHONES.index(phone)]
     except ValueError:
         return phone
 
 
 def remove_voicing(phone: str) -> str:
     try:
-        return UNVOICED_PHONE[VOICED_PHONE.index(phone)]
+        return UNVOICED_PHONES[VOICED_PHONES.index(phone)]
     except ValueError:
         return phone
 
 
 def change_voicing(phone: str) -> str:
-    if phone in UNVOICED_PHONE:
+    if phone in UNVOICED_PHONES:
         return add_voicing(phone)
-    elif phone in VOICED_PHONE:
+    elif phone in VOICED_PHONES:
         return remove_voicing(phone)
     else:
         return phone
@@ -190,10 +190,10 @@ def create_flags(tag: str) -> tuple[int, int, set[str]]:
 
 
 def devoice_final(phones: list[str]) -> list[str]:
-    if phones[-1] in VOICED:
-        phone_set = VOICED
-    elif phones[-1] in UNVOICED:
-        phone_set = UNVOICED
+    if phones[-1] in VOICED_PHONES:
+        phone_set = VOICED_PHONES
+    elif phones[-1] in UNVOICED_PHONES:
+        phone_set = UNVOICED_PHONES
     else:
         return phones
     i = len(phones) - 1
@@ -212,9 +212,9 @@ def apply_regressive_assimilation(phones: list[str]) -> list[str]:
         if voicing_f:
             new_phones[i] = voicing_f(new_phones[i])
 
-        if new_phones[i] in VOICED:
+        if new_phones[i] in VOICED_PHONES:
             voicing_f = add_voicing
-        elif new_phones[i] in UNVOICED:
+        elif new_phones[i] in UNVOICED_PHONES:
             voicing_f = remove_voicing
         else:
             voicing_f = None
@@ -268,7 +268,6 @@ if __name__ == "__main__":
             transcriptions = set()
             for start, end, tag in tags:
                 flags = [(start, end, create_flags(tag))]
-                print(flags)
                 transcription = transcribe(rules, flags, word)
                 if not transcription:
                     continue
