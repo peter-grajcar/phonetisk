@@ -92,12 +92,11 @@ t (_G -> d
 t (e  -> c
 t (i  -> c
 t (í  -> c
-$adj t (í_ -> t
-t (ický   -> t
-t (ícky   -> t
-t (izovať -> t
-t (izmus  -> t
+t (ickA   -> t
+t (izova  -> t
+t (izmu   -> t
 t (ista   -> t
+t (istka  -> t
 t (ita    -> t
 t (ika    -> t
 t (it     -> t
@@ -111,6 +110,7 @@ t (ér     -> t
 t (ea     -> t
 t (ium    -> t
 t (izm    -> t
+$adj t (í_ -> t
 
 
 ť     -> c
@@ -148,10 +148,8 @@ d (F  -> t
 d (e  -> J\
 d (i  -> J\
 d (í  -> J\
-$adj d (í_ -> d
-d (ický   -> d
-d (ícky   -> d
-d (izovať -> d
+d (ickA   -> d
+d (izova  -> d
 d (izmus  -> d
 d (ista   -> d
 d (ita    -> d
@@ -168,6 +166,7 @@ d (ea     -> d
 d (ium    -> d
 d (ek     -> d
 aka) d (e -> d
+$adj d (í_ -> d
 
 ď    -> J\
 ď (_ -> c
@@ -216,11 +215,11 @@ K) l (K   -> l=
 l (e      -> _l
 l (i      -> _l
 l (í      -> _l
-l (ický   -> l
-l (ícky   -> l
-l (izovať -> l
-l (izmus  -> l
+l (ickA   -> l
+l (izova  -> l
+l (izmu   -> l
 l (ista   -> l
+l (istka  -> l
 l (ita    -> l
 l (ika    -> l
 l (it     -> l
@@ -250,14 +249,12 @@ n (g -> N
 n (e -> J
 n (i -> J
 n (í -> J
-$adj n (í_ -> n
-$adj n (i_ -> n
 n (ď -> J
-n (ický   -> n
-n (ícky   -> n
-n (izovať -> n
-n (izmus  -> n
+n (ickA   -> n
+n (izova  -> n
+n (izmu   -> n
 n (ista   -> n
+n (istka  -> n
 n (ita    -> n
 n (ika    -> n
 n (it     -> n
@@ -272,5 +269,7 @@ n (ea     -> n
 n (ium    -> n
 mi) n (i  -> n
 l) n (ej  -> n
+$adj n (í_ -> n
+$adj n (i_ -> n
 
 ň -> J
