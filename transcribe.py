@@ -103,7 +103,7 @@ class Rule:
         return f"{self.flags} {self.left + ') ' if self.left else ''}{self.source}{' (' + self.right if self.right else ''} -> {self.targets}"
 
 
-def transcribe(rules: list[Rule], flags: list[tuple[int, int, str]], text: str):
+def transcribe(rules: list[Rule], flags: list[tuple[int, int, set[str]]], text: str):
     text = " " + text + " "
     transcription = []
     n = len(text)
@@ -118,7 +118,7 @@ def transcribe(rules: list[Rule], flags: list[tuple[int, int, str]], text: str):
             continue
 
         for rule in rules:
-            if rule.match(text, i, flags):
+            if rule.match(text, i, flags[flag_idx][2] if flag_idx < len(flags) else []):
                 if rule.targets[0] != "_":
                     transcription.extend(rule.targets)
                 i += len(rule.source)
@@ -169,14 +169,23 @@ def tag_sentence(text: str, tagger: morphodita.Tagger) -> list[tuple[int, int, s
     return tags
 
 
-def create_flags(tag: str) -> tuple[int, int, list[str]]:
-    flags = []
-    if tag.startswith("V"):
-        flags.append("$verb")
-    if tag.startswith("N"):
-        flags.append("$noun")
-    if tag.startswith("A"):
-        flags.append("$adj")
+def create_flags(tag: str) -> tuple[int, int, set[str]]:
+    flags = set()
+
+    if tag[0] == "V":
+        flags.add("$verb")
+    elif tag[0] == "N":
+        flags.add("$noun")
+    elif tag[0] == "A":
+        flags.add("$adj")
+    elif tag[0] == "D":
+        flags.add("$adv")
+
+    if tag[3] == "P":
+        flags.add("$pl")
+    elif tag[3] == "S":
+        flags.add("$sg")
+
     return flags
 
 
@@ -243,7 +252,7 @@ if __name__ == "__main__":
 
     rules.sort(key=lambda rule: rule.specificity, reverse=True)
     # for rule in rules:
-    #    print(rule, rule.specificity)
+    #   print(rule, rule.specificity)
 
     for word in sys.stdin:
         word = word.strip()
@@ -259,6 +268,7 @@ if __name__ == "__main__":
             transcriptions = set()
             for start, end, tag in tags:
                 flags = [(start, end, create_flags(tag))]
+                print(flags)
                 transcription = transcribe(rules, flags, word)
                 if not transcription:
                     continue

@@ -171,6 +171,19 @@ d (ér     -> d
 d (ea     -> d
 d (ium    -> d
 d (ek     -> d
+d (iverz  -> d
+_) d (emo -> d
+_) d (eb  -> d
+_) d (ef  -> d
+_) d (eg  -> d
+_) d (eh  -> d
+_) d (es  -> d
+_) d (ez  -> d
+_) d (ik  -> d
+_) d (iv  -> d
+_) d (is  -> d
+_) d (ip  -> d
+_) d (iz  -> d
 aka) d (e -> d
 _na) d (i -> d
 _na) d (í -> d
@@ -289,5 +302,7 @@ mi) n (i  -> n
 l) n (ej  -> n
 $adj n (í_ -> n
 $adj n (i_ -> n
+$adj n (ej_ -> n
+$adj,$pl n (e_ -> n
 
 ň -> J
