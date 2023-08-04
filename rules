@@ -1,0 +1,276 @@
+# rules for letters
+#
+# F - unvoiced group
+# G - voiced group
+# Y - voiced obstruent group
+# A - vowel group
+# K - not vowel group
+# _ - space
+
+n) ts (k  -> ts
+n) ds (k  -> ts
+s) ts (k  -> _
+s) ts (v  -> _
+s) ťs (t  -> _
+   dš (t  -> tS
+   tš (ť  -> tS
+   tš (ti -> tS
+p) tč     -> tS
+   z  (sk -> _
+   z  (šť -> _
+
+   čš    -> tS:
+   dc    -> ts:
+   dč    -> tS:
+   tc    -> ts:
+   tč    -> tS:
+A) ds (A -> ts:
+A) dš (A -> tS:
+
+tt -> t:
+nn -> n:
+šš -> S:
+rr -> r:
+ll -> l:
+žš -> S:
+dt -> t:
+ťt -> c:
+ďť -> c:
+dť -> c:
+
+ch     -> x
+_) ch  -> x
+ch (_Y -> G
+
+dz    -> dz
+dz (_ -> ts
+dz (F -> ts
+
+dž    -> dZ
+dž (_ -> tS
+dž (F -> tS
+
+ia -> i_^a
+
+ie -> i_^E
+
+iu -> i_^U
+
+ô -> U_^O
+
+a -> a
+
+e -> E
+
+i -> i
+
+y -> i
+
+ý -> i:
+
+o -> O
+
+u -> U
+
+ä -> {
+
+á -> a:
+
+é -> E:
+
+í -> i:
+
+ó -> O:
+
+ú -> U:
+
+p     -> p
+p (_G -> b
+
+t     -> t
+t (_G -> d
+t (e  -> c
+t (i  -> c
+t (í  -> c
+$adj t (í_ -> t
+t (ický   -> t
+t (ícky   -> t
+t (izovať -> t
+t (izmus  -> t
+t (ista   -> t
+t (ita    -> t
+t (ika    -> t
+t (it     -> t
+t (id     -> t
+t (ín     -> t
+t (inka   -> t
+t (ínka   -> t
+t (ent    -> t
+t (er     -> t
+t (ér     -> t
+t (ea     -> t
+t (ium    -> t
+t (izm    -> t
+
+
+ť     -> c
+ť (_G -> J\\
+
+k     -> k
+k (_G -> g
+k (k  -> _
+
+x    -> k,s
+e) x -> g,z
+
+c -> ts
+c (_G -> dz
+
+č -> tS
+č (_G -> dZ
+
+s     -> s
+s (_G -> z
+
+š     -> S
+š (_G -> Z
+
+f    -> f
+f (Y -> w
+
+b    -> b
+b (_ -> p
+b (F -> p
+
+d     -> d
+d (_  -> t
+d (F  -> t
+d (e  -> J\
+d (i  -> J\
+d (í  -> J\
+$adj d (í_ -> d
+d (ický   -> d
+d (ícky   -> d
+d (izovať -> d
+d (izmus  -> d
+d (ista   -> d
+d (ita    -> d
+d (ika    -> d
+d (it     -> d
+d (id     -> d
+d (ín     -> d
+d (inka   -> d
+d (ínka   -> d
+d (ent    -> d
+d (er     -> d
+d (ér     -> d
+d (ea     -> d
+d (ium    -> d
+d (ek     -> d
+aka) d (e -> d
+
+ď    -> J\
+ď (_ -> c
+ď (F -> c
+
+g    -> g
+g (F -> k
+
+h     -> h\
+h (_  -> x
+h (F  -> x
+h (h  -> G
+h (_h  -> G
+h (_F -> G
+
+z    -> z
+z (_ -> s
+z (F -> s
+
+ž    -> Z
+ž (_ -> S
+ž (F -> S
+
+   v     -> v
+   v (F  -> f
+o) v (_  -> U_^
+A) v (K  -> U_^
+A) v (n  -> v
+A) v (ň  -> v
+A) v (lK -> v
+A) v (ĺ  -> v
+   v (b  -> w
+   v (d  -> w
+   v (ď  -> w
+   v (z  -> w
+   v (ž  -> w
+
+r       -> r
+K) r (K -> r=
+
+ŕ       -> r:
+K) ŕ (K -> r=:
+
+l         -> l
+K) l (K   -> l=
+l (e      -> _l
+l (i      -> _l
+l (í      -> _l
+l (ický   -> l
+l (ícky   -> l
+l (izovať -> l
+l (izmus  -> l
+l (ista   -> l
+l (ita    -> l
+l (ika    -> l
+l (it     -> l
+l (id     -> l
+l (ín     -> l
+l (inka   -> l
+l (ínka   -> l
+l (ent    -> l
+l (er     -> l
+l (ér     -> l
+l (ea     -> l
+l (ium    -> l
+
+ĺ       -> l:
+K) ĺ (K -> l=:
+
+ľ -> L
+
+j -> j
+
+m    -> m
+m (f -> F
+
+n    -> n
+n (k -> N
+n (g -> N
+n (e -> J
+n (i -> J
+n (í -> J
+$adj n (í_ -> n
+$adj n (i_ -> n
+n (ď -> J
+n (ický   -> n
+n (ícky   -> n
+n (izovať -> n
+n (izmus  -> n
+n (ista   -> n
+n (ita    -> n
+n (ika    -> n
+n (it     -> n
+n (id     -> n
+n (ín     -> n
+n (inka   -> n
+n (ínka   -> n
+n (ent    -> n
+n (er     -> n
+n (ér     -> n
+n (ea     -> n
+n (ium    -> n
+mi) n (i  -> n
+l) n (ej  -> n
+
+ň -> J
