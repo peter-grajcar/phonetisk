@@ -180,6 +180,11 @@ def create_flags(tag: str) -> tuple[int, int, set[str]]:
         flags.add("$adj")
     elif tag[0] == "D":
         flags.add("$adv")
+    elif tag[0] == "C":
+        if tag[1] == "r":
+            flags.add("$num_ord")
+        elif tag[1] == "l":
+            flags.add("$num_card")
 
     if tag[3] == "P":
         flags.add("$pl")
