@@ -351,3 +351,15 @@ $adj n (ého_ -> n
 $adj n (e_ -> n
 
 ň -> J
+
+_ne) a -> ?,a
+_ne) á -> ?,a:
+_ne) i -> ?,i
+_ne) í -> ?,i:
+_ne) e -> ?,E
+_ne) é -> ?,E:
+_ne) o -> ?,O
+_ne) ó -> ?,O:
+_ne) u -> ?,U
+_ne) ú -> ?,U:
+
