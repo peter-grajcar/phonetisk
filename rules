@@ -273,9 +273,9 @@ K) ŕ (K -> r=:
 
 l         -> l
 K) l (K   -> l=
-l (e      -> _l
-l (i      -> _l
-l (í      -> _l
+l (e      -> l_j
+l (i      -> l_j
+l (í      -> l_j
 l (ickA   -> l
 l (izova  -> l
 l (izmu   -> l
