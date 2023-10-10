@@ -25,10 +25,12 @@ UNVOICED_PHONES = ["p", "t", "c", "k", "x", "G", "ts", "tS", "s", "S", "f", "c:"
 VOICED_PHONES =   ["b", "d", "J\\", "g", "h", "h\\", "dz", "dZ", "z", "Z", "v", "J\\:", "z:" "Z\\:", "dz:", "dZ:"]
 VOWEL_PHONES = ["a:", "E:", "i:", "o:", "u:", "y:", "a", "{", "E", "i", "O", "U", "U_^"]
 DIPHTHONGS = ["i_^a", "i_^E", "i_^u", "U_^O"]
-SONORANT_PHONES = ["l:", "l=:", "r:", "r=:", "r", "l", "_l", "L", "n", "J", "m", "j"]
+SONORANT_PHONES = ["l:", "l=:", "r:", "r=:", "r", "l", "l_j", "L", "n", "J", "m", "j"]
 
 MORPHODITA_MORPHO_MODEL = "models/slovak-morfflex-pdt-170914/slovak-morfflex-170914.dict"
 MORPHODITA_TAGGER_MODEL = "models/slovak-morfflex-pdt-170914/slovak-morfflex-pdt-170914.tagger"
+
+SEPARATOR = " "
 
 
 def add_voicing(phone: str) -> str:
@@ -255,6 +257,16 @@ if __name__ == "__main__":
             else:
                 print(f"Could not parse rule '{line}'", file=sys.stderr)
 
+    with open("dict") as f:
+        for line in f:
+            line = line.strip()
+            if not line:
+                continue
+            word, transcription = line.split("\t", maxsplit=1)
+            rules.append(
+                Rule("_", word, "_", transcription.split(" "), [])
+            )
+
     rules.sort(key=lambda rule: rule.specificity, reverse=True)
     # for rule in rules:
     #   print(rule, rule.specificity)
@@ -267,7 +279,7 @@ if __name__ == "__main__":
             tags = tag_sentence(word, tagger)
             flags = [(start, end, create_flags(tag)) for start, end, tag in tags]
             transcription = transcribe(rules, flags, word)
-            print(word, transcription, sep="\t")
+            print(word, transcription, sep=SEPARATOR)
         else:
             tags = tag_word(word, morpho)
             transcriptions = set()
@@ -281,4 +293,4 @@ if __name__ == "__main__":
                 transcriptions.add(" ".join(devoiced))
 
             for transcription in transcriptions:
-                print(word, transcription, sep="\t")
+                print(word, transcription, sep=SEPARATOR)
