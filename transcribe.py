@@ -21,8 +21,8 @@ VOICED = ["b", "d", "ď", "g", "h", "dz", "dž", "z", "ž", "v", "w"]
 VOWELS = ["a", "e", "i", "o", "u", "y", "á", "é", "í", "ó", "ú", "ý", "ô"]
 SONORANTS = ["r", "ŕ", "n", "m", "l", "ĺ", "ľ", "j"]
 
-UNVOICED_PHONES = ["p", "t", "c", "k", "x", "G", "ts", "tS", "s", "S", "f", "c:", "s:" "S:" "ts:", "tS:"]
-VOICED_PHONES =   ["b", "d", "J\\", "g", "h", "h\\", "dz", "dZ", "z", "Z", "v", "J\\:", "z:" "Z\\:", "dz:", "dZ:"]
+UNVOICED_PHONES = ["p", "t", "c", "k", "x", "G", "ts", "tS", "s", "S", "f", "c:", "s:S:ts:", "tS:"]
+VOICED_PHONES = ["b", "d", "J\\", "g", "h", "h\\", "dz", "dZ", "z", "Z", "v", "J\\:", "z:Z\\:", "dz:", "dZ:"]
 VOWEL_PHONES = ["a:", "E:", "i:", "o:", "u:", "y:", "a", "{", "E", "i", "O", "U", "U_^"]
 DIPHTHONGS = ["i_^a", "i_^E", "i_^u", "U_^O"]
 SONORANT_PHONES = ["l:", "l=:", "r:", "r=:", "r", "l", "l_j", "L", "n", "J", "m", "j"]
@@ -133,6 +133,7 @@ def transcribe(rules: list[Rule], flags: list[tuple[int, int, set[str]]], text: 
             return []
 
     transcription = apply_regressive_assimilation(transcription)
+    transcription = link_adjacent_vowels(transcription)
     return " ".join(transcription)
 
 
@@ -231,6 +232,20 @@ def apply_regressive_assimilation(phones: list[str]) -> list[str]:
     return new_phones
 
 
+def link_adjacent_vowels(phones: list[str]) -> list[str]:
+    new_phones = []
+    i = 0
+    while i < len(phones):
+        if i < len(phones) - 1 and phones[i] in VOWEL_PHONES and phones[i + 1] in VOWEL_PHONES:
+            new_phones.append(phones[i] + "-\\" + phones[i + 1])
+            i += 2
+        else:
+            new_phones.append(phones[i])
+            i += 1
+
+    return new_phones
+
+
 if __name__ == "__main__":
     morpho = morphodita.Morpho.load(MORPHODITA_MORPHO_MODEL)
     tagger = morphodita.Tagger.load(MORPHODITA_TAGGER_MODEL)
@@ -263,9 +278,7 @@ if __name__ == "__main__":
             if not line:
                 continue
             word, transcription = line.split("\t", maxsplit=1)
-            rules.append(
-                Rule("_", word, "_", transcription.split(" "), [])
-            )
+            rules.append(Rule("_", word, "_", transcription.split(" "), []))
 
     rules.sort(key=lambda rule: rule.specificity, reverse=True)
     # for rule in rules:
