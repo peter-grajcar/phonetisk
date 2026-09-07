@@ -6,11 +6,11 @@ dependencies = [
     "ufal.morphodita==1.11.0.3",
 ]
 
-[project.optional-dependencies]
-formatting = [
-  "black"
+[dependency-groups]
+dev = [
+  "ruff"
 ]
 
-[tool.black]
+[tool.ruff]
 line-length = 120
 
