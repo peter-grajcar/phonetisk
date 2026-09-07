@@ -55,10 +55,61 @@ dž (_ -> tS
 dž (F -> tS
 
 ia -> i_^a
+kc) ia (_ -> i,a
+l) ia (s_ -> i,a
+Anc) ia (_ -> i,a
+skop) ia (_ -> i,a
+áK) ia (_ -> i,a
+éK) ia (_ -> i,a
+úK) ia (_ -> i,a
+óK) ia (_ -> i,a
+ýK) ia (_ -> i,a
+íK) ia (_ -> i,a
+metr) ia (_ -> i,a
+lóg) ia (_ -> i,a
+typ) ia (_ -> i,a
+x) ia (_ -> i,a
+k) ia (_ -> i,a
+tyl) ia (_ -> i,a
+graf) ia (_ -> i,a
 
 ie -> i_^E
+kc) ie (_ -> i,E
+Anc) ie (_ -> i,e
+skop) ie (_ -> i,e
+áK) ie (_ -> i,e
+éK) ie (_ -> i,e
+úK) ie (_ -> i,e
+óK) ie (_ -> i,e
+ýK) ie (_ -> i,e
+íK) ie (_ -> i,e
+metr) ie (_ -> i,e
+lóg) ie (_ -> i,e
+typ) ie (_ -> i,e
+x) ie (_ -> i,e
+k) ie (_ -> i,e
+tyl) ie (_ -> i,e
+graf) ie (_ -> i,e
 
 iu -> i_^U
+kc) iu (_ -> i,U
+Anc) iu (_ -> i,U
+iu (m_ -> i,U
+iu (s_ -> i,U
+skop) iu (_ -> i,U
+áK) iu (_ -> i,U
+éK) iu (_ -> i,U
+úK) iu (_ -> i,U
+óK) iu (_ -> i,U
+ýK) iu (_ -> i,U
+íK) iu (_ -> i,U
+metr) iu (_ -> i,U
+lóg) iu (_ -> i,U
+typ) iu (_ -> i,U
+x) iu (_ -> i,U
+k) iu (_ -> i,U
+tyl) iu (_ -> i,U
+graf) iu (_ -> i,U
 
 ô -> U_^O
 
@@ -351,6 +402,8 @@ $adj n (ého_ -> n
 $adj n (e_ -> n
 
 ň -> J
+
+a) nje (l -> J,i_^E
 
 _ne) a -> ?,a
 _ne) á -> ?,a:
